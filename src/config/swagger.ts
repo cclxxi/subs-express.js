@@ -15,7 +15,7 @@ export const swaggerSpec = swaggerJSDoc({
                 description: "Local server"
             },
             {
-                url: `https://${env.PRODUCTION_DOMAIN}/api`,
+                url: `https://${env.PRODUCTION_URL}`,
                 description: "Production server"
             }
         ],
