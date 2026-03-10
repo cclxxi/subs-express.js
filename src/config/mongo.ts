@@ -2,6 +2,6 @@ import mongoose from "mongoose";
 import { env } from "./env"
 
 export async function connectMongo() {
-    await mongoose.connect(env.MONGODB_URL);
+    await mongoose.connect(process.env.MONGO_URL!);
     console.log("Mongo connected");
 }
