@@ -1,10 +1,7 @@
 import mongoose from "mongoose";
+import { env } from "./env"
 
 export async function connectMongo() {
-    const uri = process.env.MONGO_URL;
-    if (!uri) {
-        throw new Error("Mongo URL not defined");
-    }
-    await mongoose.connect(uri);
+    await mongoose.connect(env.MONGODB_URL);
     console.log("Mongo connected");
 }
