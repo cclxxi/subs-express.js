@@ -70,7 +70,14 @@ router.use(auth);
  *         application/json:
  *           schema:
  *             type: object
- *             additionalProperties: true
+ *             properties:
+ *               name:
+ *                 type: string
+ *               last4:
+ *                 type: number
+ *             required:
+ *               - name
+ *               - last4
  *     responses:
  *       200:
  *         description: Card updated successfully

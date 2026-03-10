@@ -6,7 +6,7 @@ import {AuthRequest} from "../middleware/auth.middleware";
 export async function getMySubscriptions(req: AuthRequest) {
     return Subscription
         .find({userId: req.user?.id})
-        .populate("userId", "email name surname");
+        .populate("cardId", "name last4");
 }
 
 export async function getSubscriptionById(id: string) {
@@ -67,8 +67,13 @@ export async function updatePeriodicity(
     )
 }
 
-export async function getUpcomingSubscriptions() {
-    return Subscription.find({$lte: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000)})
+export async function getUpcomingSubscriptions(userId: string) {
+    return Subscription.find({
+        userId,
+        renewalDate: {
+            $lte: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000)
+        }
+    });
 }
 
 export function calculateRenewalDate(

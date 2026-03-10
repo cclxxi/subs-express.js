@@ -9,7 +9,7 @@ export async function getMySubscriptions(req: AuthRequest, res: Response) {
         const subs = await SubscriptionService.getMySubscriptions(req);
         res.json(subs);
     } catch (err) {
-        res.status(404).json({message: "Subscriptions not found"});
+        res.status(404).json({message: err.message});
     }
 }
 
@@ -25,7 +25,7 @@ export async function getSubscriptionById(req: Request, res: Response) {
 
         res.json(sub);
     } catch (err) {
-        res.status(400).json({message: "Error finding Subscription"});
+        res.status(400).json({message: err.message});
     }
 }
 
@@ -51,7 +51,7 @@ export async function deleteSubscription(req: Request, res: Response) {
         const sub = await SubscriptionService.deleteSubscription(id);
         res.status(200).json({message: "Subscription deleted:" + sub});
     } catch (err) {
-        res.status(400).json(err.message);
+        res.status(400).json({message: err.message});
     }
 }
 
@@ -65,7 +65,7 @@ export async function updateCardInfo(req: Request, res: Response) {
         res.status(200).json(sub);
     }
     catch (err) {
-        res.status(400).json(err.message);
+        res.status(400).json({message: err.message});
     }
 }
 
@@ -79,7 +79,7 @@ export async function updateStatus(req: Request, res: Response) {
         res.status(200).json(sub);
     }
     catch (err) {
-        res.status(400).json(err.message);
+        res.status(400).json({message: err.message});
     }
 }
 
@@ -93,21 +93,11 @@ export async function updatePeriodicity(req: Request, res: Response) {
         res.status(200).json(sub);
     }
     catch (err) {
-        res.status(400).json(err.message);
+        res.status(400).json({message: err.message});
     }
 }
 
-export async function getUpcomingSubscriptions(req: Request, res: Response) {
-    try {
-        const subs = await SubscriptionService.getUpcomingSubscriptions();
-
-        if (!subs) {
-            res.status(404).json({message: "Subscriptions not found!"})
-        }
-
-        res.status(200).json(subs);
-    }
-    catch (err) {
-        res.status(400).json(err.message);
-    }
+export async function getUpcomingSubscriptions(req: AuthRequest, res: Response) {
+    const subs = await SubscriptionService.getUpcomingSubscriptions(req.user!.id);
+    res.json(subs);
 }

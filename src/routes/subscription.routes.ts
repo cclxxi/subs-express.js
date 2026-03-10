@@ -36,7 +36,15 @@ router.use(auth);
  *         application/json:
  *           schema:
  *             type: object
- *             additionalProperties: true
+ *             properties:
+ *              name:
+ *               type: string
+ *              price:
+ *               type: number
+ *              periodicity:
+ *               type: string[daily, weekly, monthly, yearly, annually, semiannually]
+ *              cardId:
+ *               type: string
  *     responses:
  *       201:
  *         description: Subscription created successfully
@@ -125,7 +133,19 @@ router.use(auth);
  *         application/json:
  *           schema:
  *             type: object
- *             additionalProperties: true
+ *             properties:
+ *               card:
+ *                 type: object
+ *                 properties:
+ *                   name:
+ *                     type: string
+ *                   last4:
+ *                     type: number
+ *                 required:
+ *                   - name
+ *                   - last4
+ *             required:
+ *               - card
  *     responses:
  *       200:
  *         description: Subscription card info updated successfully
@@ -201,12 +221,12 @@ router.use(auth);
  *         description: Internal server error
  */
 router.get("/", SubscriptionController.getMySubscriptions);
+router.get("/upcoming", SubscriptionController.getUpcomingSubscriptions);
 router.get("/:id", SubscriptionController.getSubscriptionById);
 router.post("/", validate(CreateSubscriptionSchema), SubscriptionController.createSubscription);
 router.delete("/:id", SubscriptionController.deleteSubscription);
 router.put("/:id/card", SubscriptionController.updateCardInfo);
 router.put("/:id/status", SubscriptionController.updateStatus);
 router.put("/:id/periodicity", SubscriptionController.updatePeriodicity);
-router.get("/upcoming", SubscriptionController.getUpcomingSubscriptions);
 
 export default router;
