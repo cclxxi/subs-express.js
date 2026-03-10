@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
-import { env } from "./env"
+
+const mongoRailwayUrl = "${{ MongoDB.MONGO_URL }}"
 
 export async function connectMongo() {
-    await mongoose.connect(env.MONGODB_URI);
+    await mongoose.connect(mongoRailwayUrl);
     console.log("Mongo connected");
 }

@@ -1,8 +1,9 @@
 {
-  "name": "opsflowapi",
+  "name": "subs",
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "build": "tsc",
     "start": "node dist/server.js",
     "dev": "nodemon src/server.ts"
   },
