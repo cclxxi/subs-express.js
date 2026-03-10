@@ -4,7 +4,7 @@ import { connectMongo } from "./config/mongo";
 
 async function start() {
     await connectMongo();
-    app.listen(env.PORT, () => {
+    app.listen(process.env.PORT || 3000, () => {
         console.log(`Server is running on port ${env.PORT}`);
     })
 }
