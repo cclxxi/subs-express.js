@@ -1,11 +1,11 @@
 import app from "./app"
-import * as process from "node:process";
-
-process.loadEnvFile()
+import { env } from "./config/env";
+import { connectMongo } from "./config/mongo";
 
 async function start() {
-    app.listen(process.env.PORT, () => {
-        console.log(`Server is running on port ${process.env.PORT}`);
+    await connectMongo();
+    app.listen(env.PORT, () => {
+        console.log(`Server is running on port ${env.PORT}`);
     })
 }
 
