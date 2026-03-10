@@ -14,7 +14,8 @@ export async function existsUserByEmail(email: string) {
 }
 
 export async function createUser(data: UserCreateDto) {
-    return User.create(data);
+    const user = await User.create(data);
+    return User.findById(user._id);
 }
 
 export async function findUserById(id: string) {

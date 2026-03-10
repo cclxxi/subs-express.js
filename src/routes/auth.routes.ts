@@ -26,10 +26,13 @@ const router = Router();
  *                 type: string
  *               name:
  *                 type: string
+ *               surname:
+ *                 type: string
  *             required:
  *               - email
  *               - password
  *               - name
+ *               - surname
  *     responses:
  *       201:
  *         description: User registered successfully

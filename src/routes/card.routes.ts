@@ -36,7 +36,11 @@ router.use(auth);
  *         application/json:
  *           schema:
  *             type: object
- *             additionalProperties: true
+ *             properties:
+ *              name:
+ *               type: string
+ *              last4:
+ *               type: number
  *     responses:
  *       201:
  *         description: Card created successfully
